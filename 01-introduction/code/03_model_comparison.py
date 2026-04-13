@@ -16,22 +16,25 @@ load_dotenv()
 models = ["gpt-4o-mini", "gpt-4o"]
 
 # The prompt to test
-prompt = "Explain quantum computing in one sentence."
+prompt = "Explain recursion in programming in one sentence."
 
 # Compare each model
 for model_name in models:
     print(f"\n--- {model_name} ---")
     
     # Create a ChatOpenAI instance for this model
-    model = ChatOpenAI(model=model_name)
+    model = ChatOpenAI(
+        model=model_name,
+        base_url=os.getenv("AI_ENDPOINT"),
+        api_key=os.getenv("AI_API_KEY")
+    )
     
     # Measure the time it takes to get a response
     start_time = time.time()
     response = model.invoke(prompt)
-    end_time = time.time()
     
     # Calculate elapsed time in milliseconds
-    elapsed_ms = (end_time - start_time) * 1000
+    elapsed_ms = (time.time() - start_time) * 1000
     
     # Print the results
     print(f"Response: {response.content}")

@@ -12,7 +12,11 @@ from langchain_openai import ChatOpenAI
 load_dotenv()
 
 # Create a ChatOpenAI instance with the model from environment
-model = ChatOpenAI(model=os.environ.get("AI_MODEL", "gpt-4o-mini"))
+model = ChatOpenAI(
+    model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
+    base_url=os.getenv("AI_ENDPOINT"),
+    api_key=os.getenv("AI_API_KEY")
+)
 
 # Invoke the model with a simple prompt
 response = model.invoke("Hello, how are you?")
