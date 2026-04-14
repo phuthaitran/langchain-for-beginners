@@ -20,7 +20,11 @@ load_dotenv()
 def main():
     print("💬 Multi-Turn Conversation Example\n")
 
-    model = ChatOpenAI(model=os.environ.get("AI_MODEL", "gpt-4o-mini"))
+    model = ChatOpenAI(
+        model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
+        base_url=os.getenv("AI_ENDPOINT"),
+        api_key=os.getenv("AI_API_KEY")
+    )
 
     # Start with system message and first question
     messages = [

@@ -17,26 +17,25 @@ load_dotenv()
 
 
 def temperature_comparison():
-    model_name = os.environ.get("AI_MODEL", "gpt-4o-mini")
-    print(f"🌡️  Temperature Comparison for {model_name}\n")
+    
     print("=" * 80)
 
     prompt = "Write a creative opening line for a sci-fi story about time travel."
-    is_ci = os.environ.get("CI") == "true"
-    temperatures = [0, 1] if is_ci else [0, 1, 2]  # Reduce temperatures in CI mode
-    tries = 1 if is_ci else 2  # Reduce tries in CI mode
+    temperatures = [0, 1, 2]
 
     for temp in temperatures:
         print(f"\nTemperature: {temp}")
         print("-" * 80)
 
         model = ChatOpenAI(
-            model=model_name,
+            model=os.getenv("AI_MODEL"),
+            base_url=os.getenv("AI_ENDPOINT"),
+            api_key=os.getenv("AI_API_KEY"),
             temperature=temp,
         )
 
         try:
-            for i in range(1, tries + 1):
+            for i in range(1, 3):
                 response = model.invoke(prompt)
                 print(f"  Try {i}: {response.content}")
         except Exception as error:
@@ -71,6 +70,8 @@ def max_tokens_example():
 
         model = ChatOpenAI(
             model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
+            base_url=os.getenv("AI_ENDPOINT"),
+            api_key=os.getenv("AI_API_KEY"),
             max_tokens=max_tokens,
         )
 

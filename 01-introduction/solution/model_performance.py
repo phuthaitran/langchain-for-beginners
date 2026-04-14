@@ -21,7 +21,11 @@ prompt = "Explain the concept of machine learning in 2-3 sentences."
 
 def test_model(model_name: str) -> dict:
     """Test a model and return performance metrics."""
-    model = ChatOpenAI(model=model_name)
+    model = ChatOpenAI(
+        model=model_name,
+        base_url=os.getenv("AI_ENDPOINT"),
+        api_key=os.getenv("AI_API_KEY")
+    )
     
     # Measure response time
     start_time = time.time()

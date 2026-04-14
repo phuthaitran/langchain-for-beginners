@@ -29,7 +29,7 @@ def standard_openai_example():
 
     # NOTE: This requires a standard OpenAI API key (not GitHub Models)
     # Uncomment and add OPENAI_API_KEY to your .env to test:
-    """
+    
     model = init_chat_model(
         "gpt-4o-mini",
         model_provider="openai",
@@ -42,7 +42,7 @@ def standard_openai_example():
     ])
 
     print("Response:", response.content)
-    """
+   
 
     print("This example requires a standard OpenAI API key.")
     print("For GitHub Models/Azure, use ChatOpenAI instead (see below).\n")
@@ -101,8 +101,8 @@ def main():
 
     try:
         standard_openai_example()
-        switching_providers()
-        course_recommendation()
+        # switching_providers()
+        # course_recommendation()
 
         print("\n" + "=" * 60)
         print("\n📚 Key Takeaway:")

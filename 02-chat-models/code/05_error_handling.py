@@ -18,7 +18,11 @@ load_dotenv()
 
 def robust_call(prompt: str, max_retries: int = 3) -> str:
     """Makes an API call with automatic retry logic using LangChain's built-in with_retry()"""
-    model = ChatOpenAI(model=os.environ.get("AI_MODEL", "gpt-4o-mini"))
+    model = ChatOpenAI(
+        model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
+        base_url=os.getenv("AI_ENDPOINT"),
+        api_key=os.getenv("AI_API_KEY")
+    )
 
     # Use LangChain's built-in retry logic - automatically handles retries with exponential backoff
     model_with_retry = model.with_retry(stop_after_attempt=max_retries)
@@ -41,6 +45,7 @@ def error_examples():
     try:
         bad_model = ChatOpenAI(
             model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
+            base_url=os.getenv("AI_ENDPOINT"),
             api_key="invalid_key_12345",  # Intentionally invalid
         )
 
@@ -138,7 +143,7 @@ def show_best_practices():
 
 def main():
     error_examples()
-    show_best_practices()
+    # show_best_practices()
 
     print("\n✅ Remember: Good error handling makes your app reliable!")
 
