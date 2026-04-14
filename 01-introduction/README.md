@@ -6,7 +6,7 @@ Welcome to your first step in building AI-powered applications with LangChain! I
 
 - Completed [Course Setup](../00-course-setup/README.md)
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 By the end of this chapter, you'll be able to:
 
@@ -24,16 +24,16 @@ By the end of this chapter, you'll be able to:
 **LangChain is the hardware store for AI development.**
 
 Just like a hardware store provides:
-- 🔨 **Pre-made tools** (hammers, saws, drills)
-- 🧱 **Quality materials** (lumber, nails, paint)
-- 📋 **Blueprints** (how-to guides)
-- 🔄 **Interchangeable parts** (standard sizes that work together)
+- 🔨 **Ready-to-use tools** (hammers, saws, drills) → so you don't build tools from scratch
+- 🔌 **Universal adapters** (lets any plug work with any outlet) → so you can switch between brands
+- 📋 **Blueprints** (how-to guides for common projects) → so you follow proven designs
+- 🧱 **Interchangeable parts** (standard sizes that work together) → so you can mix and match
 
 LangChain provides:
-- 🔨 **Pre-built components** (chat models, prompts, tools)
-- 🧱 **Quality abstractions** (works with any LLM provider)
-- 📋 **Patterns** (common AI application designs)
-- 🔄 **Composability** (components that work together seamlessly)
+- 🔨 **Ready-to-use components** (prompts, memory, tools) → so you don't build everything from scratch
+- 🔌 **Chat and LLM Abstractions** (one interface for OpenAI, Azure, Anthropic) → so you can switch LLMs easily
+- 📋 **Patterns** (agents, RAG, chatbots) → so you follow proven AI application designs
+- 🧱 **Composability** (components that work together seamlessly) → mix and match databases, vector stores and more in your projects
 
 **The result?** You can focus on building your application, not reinventing the wheel.
 
@@ -105,9 +105,9 @@ Let's make your first AI call using LangChain and GitHub Models!
 
 In this example, you'll create your first LangChain program that sends a simple message to an AI model and displays the response.
 
-Let's build this step by step:
+Let's walk through this step by step and then run the code:
 
-**Step 1: Import what we need**
+#### **Step 1: Import what we need**
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -117,7 +117,7 @@ import os
 load_dotenv()
 ```
 
-**Step 2: Create the AI model**
+#### **Step 2: Create the AI model**
 
 ```python
 model = ChatOpenAI(
@@ -127,17 +127,17 @@ model = ChatOpenAI(
 )
 ```
 
-**Step 3: Ask the AI a question**
+#### **Step 3: Ask the LLM a question**
 
 ```python
 response = model.invoke("What is LangChain in one sentence?")
 print("🤖 AI Response:", response.content)
-```
+``` 
 
-**Code**: [`code/01_hello_world.py`](./code/01_hello_world.py)  
+**Code**: [`code/01_hello_world.py`](./code/01_hello_world.py)
 **Run**: `python 01-introduction/code/01_hello_world.py`
 
-**Example code**:
+**This is the full example code**:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -147,7 +147,7 @@ import os
 load_dotenv()
 
 def main():
-    print("🚀 Hello LangChain!\n")
+    print("🦜🔗 Hello LangChain!\n")
 
     # Create a chat model instance
     model = ChatOpenAI(
@@ -170,8 +170,8 @@ if __name__ == "__main__":
 
 When you run this example with `python 01-introduction/code/01_hello_world.py`, you'll see:
 
-```
-🚀 Hello LangChain!
+```bash
+🦜🔗 Hello LangChain!
 
 🤖 AI Response: LangChain is a framework for building applications powered by large language models (LLMs).
 
@@ -180,28 +180,28 @@ When you run this example with `python 01-introduction/code/01_hello_world.py`, 
 
 ### How It Works
 
-**What's happening here?**
+#### **What's happening here?**
 1. We import `ChatOpenAI` from the `langchain_openai` package
-2. We create a model instance by instantiating `ChatOpenAI` with configuration
-3. We call `invoke()` with a simple string prompt
-4. We get back a response with the AI's answer
+2. We create a model instance by instantiating `ChatOpenAI` with the required parameters
+3. We call `invoke()` with a simple string prompt, which is the standard way of getting a response from an LLM in LangChain.
+4. We get back a response with the LLM's answer
 
-**Understanding ChatOpenAI Configuration**:
+<img src="images/first-llm-call-flow.png" alt="First LLM Call Flow" width="800"/>
+
+*The flow of your first LLM call - from creating a model instance to receiving a response*
+
+#### **Understanding ChatOpenAI Configuration**:
 
 The `ChatOpenAI` constructor takes three key parameters: `model` (which AI model), `base_url` (API endpoint), and `api_key` (authentication).
 
 We read these from environment variables (`AI_MODEL`, `AI_ENDPOINT`, `AI_API_KEY`) defined in your `.env` file. This keeps credentials out of code and lets you switch providers by updating `.env`.
 
 **Why use environment variables?**
-- `AI_MODEL` specifies which AI model to use (like `gpt-4o` or `gpt-4o-mini`)
+- `AI_MODEL` specifies which AI model to use (like `gpt-5` or `gpt-5-mini`)
 - `AI_ENDPOINT` tells the application where to find the AI service
-- `AI_API_KEY` provides authentication credentials
+- `AI_API_KEY` provides authentication credentials.
 
-Storing these in `.env` means you can switch between providers (GitHub Models, Azure, OpenAI) by changing just the configuration file, not your code.
-
-<img src="images/first-llm-call-flow.png" alt="First LLM Call Flow" width="800"/>
-
-*The flow of your first LLM call - from creating a model instance to receiving a response*
+Storing these in `.env` means you can switch between providers (GitHub Models, Azure, OpenAI etc.) by changing just the configuration file, not your code.
 
 ---
 
@@ -211,12 +211,12 @@ LLMs work best with structured conversations. LangChain provides message types t
 
 ### Example 2: Message Types
 
-Let's see how to use SystemMessage and HumanMessage to control AI behavior and set the tone of responses.
+Let's see how to use SystemMessage and HumanMessage to control AI behavior and set the tone of responses. 
 
-**Code**: [`code/02_message_types.py`](./code/02_message_types.py)  
+**Code**: [`code/02_message_types.py`](./code/02_message_types.py)
 **Run**: `python 01-introduction/code/02_message_types.py`
 
-**Example code:**
+**This is the full example code**:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -253,9 +253,9 @@ if __name__ == "__main__":
 
 ### Expected Output
 
-When you run this example with `python 01-introduction/code/02_message_types.py`, you'll see:
+When you run this example with `python 01-introduction/code/02_message_types.py`, you'll see something similar to:
 
-```
+```bash
 🎭 Understanding Message Types
 
 🤖 AI Response:
@@ -267,25 +267,25 @@ Quantum computing is like having a super-fast magic box that can try many differ
 
 ### How It Works
 
-**Message Types**:
+#### **Message Types**:
 - **SystemMessage**: Sets the AI's behavior and personality
 - **HumanMessage**: User input
 - **AIMessage**: The AI's responses (usually added automatically)
 
-**What's happening**:
+#### **What's happening**:
 1. The SystemMessage tells the AI to explain things simply (like to a beginner)
 2. The HumanMessage contains the user's question about quantum computing
 3. The AI crafts a response that matches the system instruction (simple explanation)
-4. Because we set the personality in the SystemMessage, the response is age-appropriate and clear
-
-**Why use messages instead of strings?**
-- Better control over AI behavior
-- Maintains conversation context
-- More powerful and flexible
+4. Because we set the personality in the SystemMessage, the response is age-appropriate and clear.
 
 <img src="images/message-types-flow.png" alt="Message Types Flow" width="800"/>
 
 *How SystemMessage, HumanMessage, and AIMessage work together in a conversation*
+
+#### **Why use messages instead of strings?**
+- Better control over AI behavior
+- Maintains conversation context
+- More powerful and flexible
 
 ---
 
@@ -293,7 +293,7 @@ Quantum computing is like having a super-fast magic box that can try many differ
 
 GitHub Models gives you access to multiple AI models. Let's compare them!
 
-**You're building an app and need to choose which model to use.** Should you use `gpt-4o` (more capable but costlier) or `gpt-4o-mini` (faster and cheaper)?
+**You're building an app and need to choose which model to use.** Should you use `gpt-5` (more capable but costlier) or `gpt-5-mini` (faster and cheaper)?
 
 Think of it like choosing between calculators: a scientific calculator handles complex equations but takes more time and resources, while a basic calculator is fast and efficient for simple math. The best way to decide is to test both with your actual prompts and compare their responses.
 
@@ -301,10 +301,10 @@ Think of it like choosing between calculators: a scientific calculator handles c
 
 Let's see how to programmatically compare different models side-by-side.
 
-**Code**: [`code/03_model_comparison.py`](./code/03_model_comparison.py)  
+**Code**: [`code/03_model_comparison.py`](./code/03_model_comparison.py) 
 **Run**: `python 01-introduction/code/03_model_comparison.py`
 
-**Example code:**
+**This is the full example code**:
 
 ```python
 from langchain_openai import ChatOpenAI
@@ -318,7 +318,7 @@ def compare_models():
     print("🔬 Comparing AI Models\n")
 
     prompt = "Explain recursion in programming in one sentence."
-    models = ["gpt-4o", "gpt-4o-mini"]
+    models = ["gpt-5", "gpt-5-mini"]
 
     for model_name in models:
         print(f"\n📊 Testing: {model_name}")
@@ -339,8 +339,8 @@ def compare_models():
 
     print("\n✅ Comparison complete!")
     print("\n💡 Key Observations:")
-    print("   - gpt-4o is more capable and detailed")
-    print("   - gpt-4o-mini is faster and uses fewer resources")
+    print("   - gpt-5 is more capable and detailed")
+    print("   - gpt-5-mini is faster and uses fewer resources")
     print("   - Choose based on your needs: speed vs. capability")
 
 if __name__ == "__main__":
@@ -355,12 +355,12 @@ When you run this example with `python 01-introduction/code/03_model_comparison.
 🔬 Comparing AI Models
 
 
-📊 Testing: gpt-4o
+📊 Testing: gpt-5
 ──────────────────────────────────────────────────
 Response: Recursion in programming is a technique where a function calls itself to solve smaller instances of the same problem until it reaches a base case.
 ⏱️  Time: 2134ms
 
-📊 Testing: gpt-4o-mini
+📊 Testing: gpt-5-mini
 ──────────────────────────────────────────────────
 Response: Recursion is when a function calls itself to solve a problem by breaking it down into smaller, similar sub-problems.
 ⏱️  Time: 1845ms
@@ -368,35 +368,35 @@ Response: Recursion is when a function calls itself to solve a problem by breaki
 ✅ Comparison complete!
 
 💡 Key Observations:
-   - gpt-4o is more capable and detailed
-   - gpt-4o-mini is faster and uses fewer resources
+   - gpt-5 is more capable and detailed
+   - gpt-5-mini is faster and uses fewer resources
    - Choose based on your needs: speed vs. capability
 ```
 
-> **Note**: Your AI's response may vary slightly from this example, and timing will depend on your network connection and API load.
+> **Note**: Your LLM's response may vary slightly from this example, and timing will depend on your network connection and API load.
 
 ### How It Works
 
-**What's happening**:
+#### **What's happening**:
 1. We define a single prompt asking about recursion
-2. We loop through two different models: `gpt-4o` and `gpt-4o-mini`
+2. We loop through two different models: `gpt-5` and `gpt-5-mini`
 3. For each model, we create a new `ChatOpenAI` instance with that model name
 4. We invoke the same prompt on each model
 5. We display the response from each model for comparison
 
-**What you'll notice**:
+#### **What you'll notice**:
 - Different models have different response styles
-- `gpt-4o` tends to be more detailed and sophisticated
-- `gpt-4o-mini` is more concise but still accurate
+- `gpt-5` tends to be more detailed and sophisticated
+- `gpt-5-mini` is more concise but still accurate
 - Both answers are correct, just expressed differently
 
 ---
 
-## 🔄 Switching to Azure AI Foundry
+## 🔄 Switching to Microsoft Foundry
 
-**Want to use Azure AI Foundry instead of GitHub Models?** All the code you just wrote will work with zero changes!
+**Want to use Microsoft Foundry instead of GitHub Models?** All the code you just wrote will work with zero changes!
 
-Simply update your `.env` file with your Azure endpoint and API key. For detailed setup instructions, see the [Azure AI Foundry Setup](../00-course-setup/APPENDIX.md#azure-ai-foundry-setup).
+Simply update your `.env` file with your Azure endpoint and API key. For detailed setup instructions, see the [Microsoft Foundry Setup](../00-course-setup/APPENDIX.md#azure-ai-foundry-setup).
 
 ---
 
@@ -413,14 +413,14 @@ graph LR
     A --> F[Memory]
     B --> G[Provider Abstraction]
     G --> H[GitHub Models]
-    G --> I[Azure AI Foundry]
+    G --> I[Microsoft Foundry]
 ```
 
 *These concepts work together to create powerful AI applications. You'll explore each in depth throughout the course.*
 
 ---
 
-## 🎮 Try This Yourself!
+## 🎮 Try More Yourself
 
 **Quick Challenge**: Before moving to the next section, try modifying Example 1:
 
@@ -435,7 +435,7 @@ graph LR
 
 ## 🌟 Real-World Applications
 
-**Where you'll see these concepts in action:**
+#### **Where you'll see these concepts in action:**
 
 - **Chatbots & Virtual Assistants**: Use models, memory, and system messages to maintain helpful conversations
 - **Content Generation Tools**: Use prompts and templates to create consistent, high-quality content
@@ -453,14 +453,14 @@ Let's review what you learned:
 - **LangChain is an abstraction layer** - It provides a consistent interface across different LLM providers
 - **Built on composable components** - Models, prompts, tools, agents, and memory work together
 - **GitHub Models offers free access** - Perfect for learning and prototyping
-- **Azure AI Foundry is production-ready** - Switch anytime by changing the environment variables in your `.env` file
+- **Microsoft Foundry is production-ready** - Switch anytime by changing the environment variables in your `.env` file
 - **Messages have types** - SystemMessage, HumanMessage, and AIMessage serve different purposes
 
 ---
 
 ## 🏆 Assignment
 
-Ready to practice? Complete the challenges in [assignment.md](./assignment.md)!
+The more you practice the better you'll get! We've made a few more challenges you can try to help you practice. Complete the challenges in [assignment.md](./assignment.md)!
 
 The assignment includes:
 1. **System Prompts Experiment** - Learn how SystemMessage affects AI behavior
@@ -494,11 +494,11 @@ You've laid the foundation in this chapter. Next, you'll start with basic AI con
 
 If you get stuck or have any questions about building AI apps, join:
 
-[![Azure AI Foundry Discord](https://img.shields.io/badge/Discord-Azure_AI_Foundry_Community_Discord-blue?style=for-the-badge&logo=discord&color=5865f2&logoColor=fff)](https://aka.ms/foundry/discord)
+[![Microsoft Foundry Discord](https://img.shields.io/badge/Discord-Azure_AI_Foundry_Community_Discord-blue?style=for-the-badge&logo=discord&color=5865f2&logoColor=fff)](https://aka.ms/foundry/discord)
 
 If you have product feedback or errors while building visit:
 
-[![Azure AI Foundry Developer Forum](https://img.shields.io/badge/GitHub-Azure_AI_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
+[![Microsoft Foundry Developer Forum](https://img.shields.io/badge/GitHub-Azure_AI_Foundry_Developer_Forum-blue?style=for-the-badge&logo=github&color=000000&logoColor=fff)](https://aka.ms/foundry/forum)
 
 If you run into issues with the course materials, please open an issue in the GitHub repo:
 

@@ -18,9 +18,9 @@ load_dotenv()
 
 def track_token_usage():
     model = ChatOpenAI(
-        model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
+        model=os.getenv("AI_MODEL"),
         base_url=os.getenv("AI_ENDPOINT"),
-        api_key=os.getenv("AI_API_KEY")
+        api_key=os.getenv("AI_API_KEY"),
     )
 
     print("📊 Token Usage Tracking Example\n")

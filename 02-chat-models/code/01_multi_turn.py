@@ -20,8 +20,9 @@ load_dotenv()
 def main():
     print("💬 Multi-Turn Conversation Example\n")
 
+    # Create a chat model instance
     model = ChatOpenAI(
-        model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
+        model=os.getenv("AI_MODEL"),
         base_url=os.getenv("AI_ENDPOINT"),
         api_key=os.getenv("AI_API_KEY")
     )
@@ -44,19 +45,19 @@ def main():
     messages.append(HumanMessage(content="Can you show me a simple example?"))
 
     response2 = model.invoke(messages)
+    messages.append(AIMessage(content=str(response2.content)))
     print(f"\n🤖 AI: {response2.content}")
 
     # Third exchange - AI still remembers everything
     print("\n👤 User: What are the benefits compared to other languages?")
-    messages.append(AIMessage(content=str(response2.content)))
     messages.append(HumanMessage(content="What are the benefits compared to other languages?"))
 
+    # the 3rd AI response is not added to conversation history since it is the last in the conversation
     response3 = model.invoke(messages)
     print(f"\n🤖 AI: {response3.content}")
 
     print("\n\n✅ Notice how the AI maintains context throughout the conversation!")
-    print(f"📊 Total messages in history: {len(messages)}")
-
+    print(f"📊 Total messages in history: {len(messages)} messages, that include 1 system message, 3 Human messages and 2 AI responses")
 
 if __name__ == "__main__":
     main()

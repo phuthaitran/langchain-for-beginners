@@ -9,24 +9,28 @@ from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 
-# Load environment variables
 load_dotenv()
 
-# Create a ChatOpenAI instance
-model = ChatOpenAI(
-    model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
-    base_url=os.getenv("AI_ENDPOINT"),
-    api_key=os.getenv("AI_API_KEY")
-)
+def main():
+    print("🎭 Understanding Message Types\n")
 
-# Create messages with different types
-messages = [
-    SystemMessage(content="You are a helpful assistant that speaks like a pirate."),
-    HumanMessage(content="Tell me about the weather today."),
-]
+    model = ChatOpenAI(
+        model=os.getenv("AI_MODEL"),
+        base_url=os.getenv("AI_ENDPOINT"),
+        api_key=os.getenv("AI_API_KEY")
+    )
 
-# Invoke the model with the messages
-response = model.invoke(messages)
+    # Using structured messages for better control
+    messages = [
+        SystemMessage(content="You are a helpful AI assistant who explains things simply."),
+        HumanMessage(content="Explain quantum computing to a 10-year-old."),
+    ]
 
-# Print the response content
-print(response.content)
+    response = model.invoke(messages)
+
+    print("🤖 AI Response:\n")
+    print(response.content)
+    print("\n✅ Notice how the SystemMessage influenced the response style!")
+
+if __name__ == "__main__":
+    main()

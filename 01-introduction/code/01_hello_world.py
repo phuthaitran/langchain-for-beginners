@@ -8,18 +8,23 @@ import os
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
-# Load environment variables
 load_dotenv()
 
-# Create a ChatOpenAI instance with the model from environment
-model = ChatOpenAI(
-    model=os.environ.get("AI_MODEL", "gpt-4o-mini"),
-    base_url=os.getenv("AI_ENDPOINT"),
-    api_key=os.getenv("AI_API_KEY")
-)
+def main():
+    print("🦜🔗 Hello LangChain!\n")
 
-# Invoke the model with a simple prompt
-response = model.invoke("Hello, how are you?")
+    # Create a chat model instance
+    model = ChatOpenAI(
+        model=os.getenv("AI_MODEL"),
+        base_url=os.getenv("AI_ENDPOINT"),
+        api_key=os.getenv("AI_API_KEY")
+    )
 
-# Print the response content
-print(response.content)
+    # Make your first AI call!
+    response = model.invoke("What is LangChain in one sentence?")
+
+    print("🤖 AI Response:", response.content)
+    print("\n✅ Success! You just made your first LangChain call!")
+
+if __name__ == "__main__":
+    main()

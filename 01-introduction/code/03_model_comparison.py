@@ -1,6 +1,6 @@
 """
-Lesson 01 - Model Comparison
-This example demonstrates how to compare responses from different models.
+Lesson 01 - Model Comparison in LangChain
+This example shows how to compare different AI models.
 """
 
 import os
@@ -9,33 +9,38 @@ import time
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
-# Load environment variables
 load_dotenv()
 
-# List of models to compare
-models = ["gpt-4o-mini", "gpt-4o"]
 
-# The prompt to test
-prompt = "Explain recursion in programming in one sentence."
+def compare_models():
+    print("🔬 Comparing AI Models\n")
 
-# Compare each model
-for model_name in models:
-    print(f"\n--- {model_name} ---")
-    
-    # Create a ChatOpenAI instance for this model
-    model = ChatOpenAI(
-        model=model_name,
-        base_url=os.getenv("AI_ENDPOINT"),
-        api_key=os.getenv("AI_API_KEY")
-    )
-    
-    # Measure the time it takes to get a response
-    start_time = time.time()
-    response = model.invoke(prompt)
-    
-    # Calculate elapsed time in milliseconds
-    elapsed_ms = (time.time() - start_time) * 1000
-    
-    # Print the results
-    print(f"Response: {response.content}")
-    print(f"Time: {elapsed_ms:.2f}ms")
+    prompt = "Explain recursion in programming in one sentence."
+    models = ["gpt-4o", "gpt-4o-mini"]
+
+    for model_name in models:
+        print(f"\n📊 Testing: {model_name}")
+        print("─" * 50)
+
+        model = ChatOpenAI(
+            model=model_name,
+            base_url=os.getenv("AI_ENDPOINT"),
+            api_key=os.getenv("AI_API_KEY"),
+        )
+
+        start_time = time.time()
+        response = model.invoke(prompt)
+        duration = (time.time() - start_time) * 1000
+
+        print(f"Response: {response.content}")
+        print(f"⏱️  Time: {duration:.0f}ms")
+
+    print("\n✅ Comparison complete!")
+    print("\n💡 Key Observations:")
+    print("   - gpt-4o is more capable and detailed")
+    print("   - gpt-4o-mini is faster and uses fewer resources")
+    print("   - Choose based on your needs: speed vs. capability")
+
+
+if __name__ == "__main__":
+    compare_models()

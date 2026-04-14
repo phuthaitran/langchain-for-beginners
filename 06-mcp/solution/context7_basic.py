@@ -49,7 +49,7 @@ async def main():
 
         # Step 3: Create the AI model
         model = ChatOpenAI(
-            model=os.getenv("AI_MODEL", "gpt-4o-mini"),
+            model=os.getenv("AI_MODEL", "gpt-5-mini"),
             base_url=os.getenv("AI_ENDPOINT"),
             api_key=os.getenv("AI_API_KEY"),
         )
@@ -60,8 +60,8 @@ async def main():
 
         # Step 5: Query for documentation
         queries = [
-            "How do I use Express.js middleware?",
-            "What are React hooks and how do I use useState?",
+            "How do I use FastAPI dependency injection?",
+            "What is Python's asyncio and how do I use async/await?",
         ]
 
         for query in queries:

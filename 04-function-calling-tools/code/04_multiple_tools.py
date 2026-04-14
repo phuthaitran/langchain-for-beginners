@@ -68,7 +68,11 @@ def main():
     print("🎛️ Multiple Tools Demo\n")
     print("=" * 80 + "\n")
 
-    model = ChatOpenAI(model=os.environ.get("AI_MODEL", "gpt-4o-mini"))
+    model = ChatOpenAI(
+        model=os.getenv("AI_MODEL"),
+        base_url=os.getenv("AI_ENDPOINT"),
+        api_key=os.getenv("AI_API_KEY"),
+    )
 
     model_with_tools = model.bind_tools([calculator, search, get_weather])
 

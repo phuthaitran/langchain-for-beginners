@@ -105,7 +105,7 @@ async def main():
 
         # Step 4: Create model
         model = ChatOpenAI(
-            model=os.getenv("AI_MODEL", "gpt-4o-mini"),
+            model=os.getenv("AI_MODEL", "gpt-5-mini"),
             base_url=os.getenv("AI_ENDPOINT"),
             api_key=os.getenv("AI_API_KEY"),
         )
@@ -117,7 +117,7 @@ async def main():
         # Step 6: Test with different queries
         queries = [
             "What is 125 * 8?",
-            "How do I use React hooks?",
+            "How do I use Python decorators?",
             "Calculate 50 + 25",
         ]
 
