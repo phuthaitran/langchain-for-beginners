@@ -23,7 +23,7 @@ class Person(BaseModel):
 
     name: str = Field(description="The person's full name")
     age: int = Field(description="The person's age in years")
-    email: str = Field(description="The person's email address")
+    email: EmailStr = Field(description="The person's email address")
     occupation: str = Field(description="The person's job or profession")
 
 
